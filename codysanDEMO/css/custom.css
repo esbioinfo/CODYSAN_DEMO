@@ -1,0 +1,155 @@
+.btn-space {
+    margin: 3px;
+}
+
+.btn-login {
+    width: 150px;
+}
+
+.codysan-logo {
+    margin: 10px;
+	margin-left: -10px;
+}
+
+html,body{
+    height: 100%
+}
+
+.footer     {
+	position: relative;
+	bottom:0;
+    width: 100%;
+    line-height: 30px;
+	background-color: #e3e3e3;
+	clear:both;
+	padding-top:10px;
+	padding-bottom: 10px;
+	
+}
+
+.container-fluid {
+	min-height: 100%;
+	
+}
+
+body {
+    margin-bottom:70px;
+	padding-top: 122px;
+}
+
+.refList li {
+	font-style: italic;
+}
+
+.img-fluid.partners {
+	position:relative;
+    top:0;
+    bottom:0;
+    margin:auto;
+	vertical-align: middle;	
+}
+
+
+.jumbotron{
+	background-size: cover; 
+	height: 100%;
+	width: 100%;
+	background-color: rgba(255,255,255,0.6);
+	background-blend-mode: lighten;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-top: -28px;
+}
+
+.jbtron{
+	margin-top: -42px;
+}		
+
+div.form-inline label.col-sm-2{
+    justify-content: flex-end;
+}
+
+.jumbotron p, .jumbotron h1{
+	padding-left: 80px;
+	padding-right: 80px;
+}
+
+.triple-alert{
+    margin-left: 0px;
+	margin-right: 0px;
+	padding-left: 3px;
+	padding-right: 3px;	
+
+}
+
+div.alert {
+	min-height: 100%;
+	
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.close-all{
+	position: relative;
+	z-index: 1;
+	margin-top: -215px;	
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+
+.downcategory{
+	font-weight: bold;
+}
+
+
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 6px; /* Some padding */
+	padding-left: 10px;
+	padding-right: 10px;
+    border-radius: 50%; /* Rounded corners */
+}
+
+#myBtn:hover {
+    background-color: #555; /* Add a dark-grey background on hover */
+}
+
+.navbar-brand>a {
+     position: absolute;
+     z-index: 9999;
+ }
+
+ 
+form .form-group .form-check {
+	 margin-left: 60px;
+	 
+ }
+ 
+.hidden {                    /* this will hide all divs on the page */
+  display:none;
+}
+
+.navbar {
+	min-height: 100px;
+	
+}

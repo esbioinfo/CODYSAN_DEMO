@@ -1,0 +1,1082 @@
+			<div class="row">
+				<div class="jumbotron jumbotron-fluid jbtron" style="background-image: url(img/headerDiagnostics.jpg)">
+					<h1 class="display-3">CoDysAn Diagnostic Tool</h1>
+				</div>
+			</div>					
+			<div class="row">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-10">
+					<h4>All fields marked with * are required</h4>
+					<div id="step1">
+						<h3>General information</h3>
+						<p>Before starting the diagnostic, you must provide some basic information.</p>
+						<p>Please, fill in the following information:</p>
+						<div class="card card-body">
+							<form>
+								<div class="form-group">
+								<label for="step" class="col-sm-2 col-form-label"><strong>Step 1/4</strong></label>
+								</div>
+								<div class="form-inline form-group">
+									<!--
+									<label for="DateOfBirth" class="col-sm-2 col-form-label">Year of birth:</label>
+									<input class="form-control col-sm-2" type="number" value="2000" min="1900" max="2018" id="YearOfBirth" onchange="hndChngAgeOfBirth(this);">
+										<label for="gender" class="col-sm-2 col-form-label">Gender*:</label>
+									<div class="form-check form-check-inline">
+									  <label class="form-check-label">
+										<input class="form-check-input" type="radio" name="gender" id="genderM" value="Male">Male
+									  </label>
+									</div>
+									<div class="form-check form-check-inline">
+									  <label class="form-check-label">
+										<input class="form-check-input" type="radio" name="gender" id="genderF" value="Female">Female
+									  </label>
+									</div>
+									-->
+									<label for="Age" class="col-sm-2 col-form-label">Age:</label>
+									<select class="form-control col-sm-2" id="Age">
+									  <option>> 12 years</option>
+									  <option>> 6 m. to 12 years</option>
+									  <option>0 to 6 months</option>									
+									</select>
+									<label for="gender" class="col-sm-2 col-form-label">Gender*:</label>
+									<div class="form-check form-check-inline">
+									  <label class="form-check-label">
+										<input class="form-check-input" type="radio" name="gender" id="genderM" value="Male">Male
+									  </label>
+									</div>
+									<div class="form-check form-check-inline">
+									  <label class="form-check-label">
+										<input class="form-check-input" type="radio" name="gender" id="genderF" value="Female">Female
+									  </label>
+									</div>
+								</div>
+								<div class="form-inline form-group">
+									<label for="HbLevel" class="col-sm-2 col-form-label">Hemoglobin level*:</label>
+									<input class="form-control col-sm-2" type="number" step="0.1" value="15.0" min="0" max="100" id="HbLevel" onchange="hndChngHbLevel(this);">
+									<!-- afegir una acció pel canvi d'unitats -->
+									<label for="HbUnits" class="col-sm-2 col-form-label">Units:</label>
+									<select class="form-control col-sm-2" id="HbUnits" onchange="hndChngHbUnits(this);">
+										<option>g/dL</option>
+										<option>g/L</option>
+									</select>
+									<small id="UnitsHelp" class="text-muted">
+									&nbsp&nbspMake sure you are using the proper units.
+									</small>
+								</div>
+								<div class="form-inline form-group">
+
+									<label for="next1" class="col-8 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-3" id="next1">Next step</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div id="step2" class="hidden">
+						<h3>Additional information</h3>
+						<p>The diagnostic requires additional information.</p>
+						<p>Please, follow the steps until you get the result.</p>
+						<div class="card card-body">
+							<form>
+								<div class="form-group">
+								<label for="step" class="col-sm-2 col-form-label"><strong>Step 2/4</strong></label>										
+								</div>
+								<h3>Mean Corpuscular Volume (MCV)</h3>
+								<div class="form-inline form-group">
+									<label for="RBCMCV" class="col-sm-2 col-form-label">RBCs Mean Corpuscular Volume (MCV):</label>
+									<input class="form-control col-sm-2" type="number" step="1" value="85" min="0" max="200" id="RBCMCV" onchange="hndChngRBCMCV(this);">
+									<label for="MCVUnits" class="col-sm-2 col-form-label">Units:</label>
+									<select class="form-control col-sm-2" id="MCVUnits">
+										<option>fL</option>
+									</select>
+									<small id="passwordHelpInline" class="text-muted">
+									&nbsp&nbspMake sure you are using the proper units.
+									</small>
+								</div>
+								<h3>Reticulocytes count</h3>
+								<div class="form-inline form-group">
+									<label for="RetCnt" class="col-sm-2 col-form-label">Reticulocytes:</label>
+									<input class="form-control col-sm-2" type="number" step="1" value="30" min="0" max="200" id="RetCnt" onchange="hndChngRetCnt(this);">
+									<!-- afegir una acció pel canvi d'unitats -->
+									<label for="RetUnits" class="col-sm-2 col-form-label">Units:</label>
+									<select class="form-control col-sm-2" id="RetUnits" onchange="hndChngRetUnits(this);">
+										<option>x10^9/L</option>
+										<option>%</option>
+										<option>x10^3/&microL</option>
+										<option>/mm^3</option>
+									</select>
+									<small id="passwordHelpInline" class="text-muted">
+									&nbsp&nbspMake sure you are using the proper units.
+									</small>
+								</div>
+								<h3>Platelets count</h3>
+								<div class="form-inline form-group">
+									<label for="PlatCnt" class="col-sm-2 col-form-label">Platelets:</label>
+									<input class="form-control col-sm-2" type="number" step="1" value="150" min="0" max="500" id="PlatCnt" onchange="hndChngPlatCnt(this);">
+									<!-- afegir una acció pel canvi d'unitats -->
+									<label for="PlatCntUnits" class="col-sm-2 col-form-label">Units:</label>
+									<select class="form-control col-sm-2" id="PlatUnits" onchange="hndChngPlatUnits(this);">
+										<option>x10^9/L</option>
+										<option>x10^3/&microL</option>
+										<option>/mm^3</option>
+									</select>
+									<small id="UnitsHelp" class="text-muted">
+									&nbsp&nbspMake sure you are using the proper units.
+									</small>
+								</div>
+								<!--
+								<div class="form-inline form-group">
+									<label for="MPV" class="col-sm-2 col-form-label">Mean Platelet Volume (MPV):</label>
+								
+									<input class="form-control col-sm-2" type="number" value="15" min="0" max="100" id="MPV" onchange="hndChngMPV(this);">
+									<label for="MPVUnits" class="col-sm-2 col-form-label">Units:</label>
+									<select class="form-control col-sm-2" id="MPVUnits">
+										<option>fL</option>
+									</select>
+									<small id="UnitsdHelp" class="text-muted">
+									&nbsp&nbspMake sure you are using the proper units.
+									</small>
+								</div>
+								-->
+								<div class="form-inline form-group">
+									<label for="" class="col-8 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-3" id="next2">Next step</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div id="step3a" class="hidden">
+						<h3>Excluding other possible causes of anemia</h3>
+						<p>Please, select if you would like to exclude any other potential causes of anemia.</p>
+						<div class="card card-body">
+							<form>
+								<div class="form-group">
+								<label for="step" class="col-sm-2 col-form-label"><strong>Step 3/4</strong></label>										
+								</div>
+								<h3>Exclude other causes of macrocytic anemias.</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3a1" value="Megaloblastic Anemias (Vit B12 / Folate deficiency)">
+									  <label class="form-check-label" for="grid3a1">
+										Megaloblastic Anemias (Vit B12 / Folate deficiency)
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3a2" value="Hemolytic Anemia due to RBC defects (enzymopathies or membranopathies)">
+									  <label class="form-check-label" for="grid3a2">
+										Hemolytic Anemia due to RBC defects (enzymopathies or membranopathies)
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3a3" value="Myelodysplastic Syndromes (MDS)">
+									  <label class="form-check-label" for="grid3a3">
+										Myelodysplastic Syndromes (MDS)
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3a4" value="Gilbert Syndrome">
+									  <label class="form-check-label" for="grid3a4">
+										Gilbert Syndrome
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3a5" value="Infections">
+									  <label class="form-check-label" for="grid3a5">
+										Infections
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3a6" value="Liver disease">
+									  <label class="form-check-label" for="grid3a6">
+										Liver disease 
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3a7" value="Hypothyroidism">
+									  <label class="form-check-label" for="grid3a7">
+										Hypothyroidism
+									  </label>
+									</div>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-sm-1 col-form-label"></label>
+									<button type="button" class="btn btn-light col-2" id="check3a" onclick="checkAll(2);">Check all</button>
+									<button type="button" class="btn btn-light col-2 hidden" id="uncheck3a" onclick="checkAll(2);">Uncheck all</button>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-sm-8 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-3" id="next3a">Next step</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div id="step3b" class="hidden">
+						<h3>Excluding other possible causes of anemia</h3>
+						<p>Please, select if you would like to exclude any other potential causes of anemia.</p>
+						<div class="card card-body">
+							<form>
+								<div class="form-group">
+								<label for="step" class="col-sm-2 col-form-label"><strong>Step 3/4</strong></label>										
+								</div>
+								<h3>Exclude other causes of normocytic anemias.</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3b1" value="Hemolytic Anemia (Hereditary spherocytosis)">
+									  <label class="form-check-label" for="grid3b1">
+										Hemolytic Anemia(Hereditary spherocytosis)
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3b2" value="Aplastic Anemias">
+									  <label class="form-check-label" for="grid3b2">
+										Aplastic Anemias
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3b3" value="Anemia Chronic Disease (ACD)">
+									  <label class="form-check-label" for="grid3b3">
+										Anemia Chronic Disease (ACD)
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3b4" value="Myelodysplastic Syndromes (MDS)">
+									  <label class="form-check-label" for="grid3b4">
+										Myelodysplastic Syndromes (MDS)
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3b5" value="Gilbert Syndrome">
+									  <label class="form-check-label" for="grid3b5">
+										Gilbert Syndrome
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3b6" value="Infections">
+									  <label class="form-check-label" for="grid3b6">
+										Infections
+									  </label>
+									</div>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-sm-1 col-form-label"></label>
+									<button type="button" class="btn btn-light col-2" id="check3b" onclick="checkAll(3);">Check all</button>
+									<button type="button" class="btn btn-light col-2 hidden" id="uncheck3b" onclick="uncheckAll(3);">Uncheck all</button>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-sm-8 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-sm-3" id="next3b">Next step</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					
+					<div id="step3c" class="hidden">
+						<h3>Excluding other possible causes of anemia</h3>
+						<p>Please, select if you would like to exclude any other potential causes of anemia.</p>
+						<div class="card card-body">
+							<form>
+								<div class="form-group">
+								<label for="step" class="col-sm-2 col-form-label"><strong>Step 3/4</strong></label>										
+								</div>
+								<h3>Exclude other causes of microcytic anemias.</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3c1" value="Thalassemias">
+									  <label class="form-check-label" for="grid3c1">
+										Thalassemias
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3c2" value="Anemia Chronic Disease (ACD)">
+									  <label class="form-check-label" for="grid3c2">
+										Anemia Chronic Disease (ACD)
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3c3" value="Sideroblastic Anemias">
+									  <label class="form-check-label" for="grid3c3">
+										Sideroblastic Anemias 
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3c4" value="Lead poisoning">
+									  <label class="form-check-label" for="grid3c4">
+										Lead poisoning
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3c5" value="Infections">
+									  <label class="form-check-label" for="grid3c5">
+										Infections
+									  </label>
+									</div>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-sm-1 col-form-label"></label>
+									<button type="button" class="btn btn-light col-2" id="check3c" onclick="checkAll(4);">Check all</button>
+									<button type="button" class="btn btn-light col-2 hidden" id="uncheck3c" onclick="uncheckAll(4);">Uncheck all</button>
+								</div>
+								<h3>Exclude other causes of thrombocytopenia.</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid3c6" value="Wiskott-Aldrich syndrome and others">
+									  <label class="form-check-label" for="grid3c6">
+										Wiskott-Aldrich syndrome and others
+									  </label>
+									</div>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-sm-8 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-3" id="next3c">Next step</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					
+					<div id="step4a" class="hidden">
+						<p>Please, select if any of these apply.</p>
+						<div class="card card-body">
+							<form>
+								<div class="form-group">
+								<label for="step" class="col-sm-2 col-form-label"><strong>Step 4/4</strong></label>										
+								</div>
+								<h3>Bone marrow</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4a1" value="Incompletely divided cells">
+									  <label class="form-check-label" for="grid4a1">
+										Incompletely divided cells 
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4a2" value="Binucleated erythroblasts (3-7%)">
+									  <label class="form-check-label" for="grid4a2">
+										Binucleated erythroblasts (3-7%)
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4a3" value="Thin chromatin bridges between pairs of erythroblasts">
+									  <label class="form-check-label" for="grid4a3">
+										Thin chromatin bridges between pairs of erythroblasts
+									  </label>
+									</div>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-sm-1 col-form-label"></label>
+									<button type="button" class="btn btn-light col-2" id="check4a" onclick="checkAll(5);">Check all</button>
+									<button type="button" class="btn btn-light col-2 hidden" id="uncheck4a" onclick="uncheckAll(5);">Uncheck all</button>
+								</div>
+								<h3>Electron microscopy</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4a4" value="“Swiss cheese appearance” of the erythroblasts' heterochromatin">
+									  <label class="form-check-label" for="grid4a4">
+										“Swiss cheese appearance” of the erythroblasts' heterochromatin
+									  </label>
+									</div>
+								</div>
+								<h3>Additional features</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4a5" value="⅓ Presence of Malformations">
+									  <label class="form-check-label" for="grid4a5">
+										⅓ Presence of Malformations
+									  </label>
+									</div>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-8 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-3" id="next4a">Next step</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					
+					<div id="step4b" class="hidden">
+						<p>Please, select if any of these apply.</p>
+						<div class="card card-body">
+							<form>
+								<div class="form-group">
+								<label for="step" class="col-sm-2 col-form-label"><strong>Step 4/4</strong></label>										
+								</div>
+								<h3>Bone marrow</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b1" value="Binucleated (10-30%) and rarely multinucleated late polychromatic erythroblasts">
+									  <label class="form-check-label" for="grid4b1">
+										Binucleated (10-30%) and rarely multinucleated late polychromatic erythroblasts
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b2" value="Giant multinucleated (up to 12 nuclei) erythroblasts">
+									  <label class="form-check-label" for="grid4b2">
+										Giant multinucleated (up to 12 nuclei) erythroblasts
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b3" value="Abnormal megakaryocytes">
+									  <label class="form-check-label" for="grid4b3">
+										Abnormal megakaryocytes
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b4" value="Tri- and multi- nucleated erythroblasts">
+									  <label class="form-check-label" for="grid4b4">
+										Tri- and multi- nucleated erythroblasts
+									  </label>
+									</div>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-sm-1 col-form-label"></label>
+									<button type="button" class="btn btn-light col-2" id="check4b1" onclick="checkAll(61);">Check all</button>
+									<button type="button" class="btn btn-light col-2 hidden" id="uncheck4b1" onclick="uncheckAll(61);">Uncheck all</button>
+								</div>
+								<h3>Electronic microscopy</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b5" value="Double plasma membrane in erythroblasts">
+									  <label class="form-check-label" for="grid4b5">
+										Double plasma membrane in erythroblasts
+									  </label>
+									</div>
+								</div>
+								<h3>Biochemical diagnosis</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b6" value="Hypoglycosylation of AE1 Test HAM positive">
+									  <label class="form-check-label" for="grid4b6">
+										Hypoglycosylation of AE1 Test HAM positive
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b7" value="High serum thymidine kinase">
+									  <label class="form-check-label" for="grid4b7">
+										High serum thymidine kinase
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b8" value="Invagination of nuclear membrane">
+									  <label class="form-check-label" for="grid4b8">
+										Invagination of nuclear membrane
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b9" value="Intra-nuclear precipitated material and nuclear blebbing">
+									  <label class="form-check-label" for="grid4b9">
+										Intra-nuclear precipitated material and nuclear blebbing
+									  </label>
+									</div>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-sm-1 col-form-label"></label>
+									<button type="button" class="btn btn-light col-2" id="check4b2" onclick="checkAll(62);">Check all</button>
+									<button type="button" class="btn btn-light col-2 hidden" id="uncheck4b2" onclick="uncheckAll(62);">Uncheck all</button>
+								</div>
+								<h3>Additional information</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b10" value="Gammopathies">
+									  <label class="form-check-label" for="grid4b10">
+										Gammopathies
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b11" value="Multiple myeloma">
+									  <label class="form-check-label" for="grid4b11">
+										Multiple myeloma
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b12" value="Retinal angioid streaks">
+									  <label class="form-check-label" for="grid4b12">
+										Retinal angioid streaks
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4b13" value="Hereditary persistence of fetal hemoglobin (HPFH)">
+									  <label class="form-check-label" for="grid4b13">
+										Hereditary persistence of fetal hemoglobin (HPFH)
+									  </label>
+									</div>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-sm-1 col-form-label"></label>
+									<button type="button" class="btn btn-light col-2" id="check4b3" onclick="checkAll(63);">Check all</button>
+									<button type="button" class="btn btn-light col-2 hidden" id="uncheck4b3" onclick="uncheckAll(63);">Uncheck all</button>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-8 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-3" id="next4b">Next step</button>
+								</div>
+							</form>	
+						</div>	
+					</div>
+					
+					<div id="step4c" class="hidden">
+						<p>Please, select if any of these apply.</p>
+						<div class="card card-body">
+							<form>
+								<div class="form-group">
+								<label for="step" class="col-sm-2 col-form-label"><strong>Step 4/4</strong></label>										
+								</div>
+								<h3>Bone marrow</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4c1" value="Dysplastic erythropoiesis, with megaloblastic features">
+									  <label class="form-check-label" for="grid4c1">
+										Dysplastic erythropoiesis, with megaloblastic features
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4c2" value="Nuclear irregularities">
+									  <label class="form-check-label" for="grid4c2">
+										Nuclear irregularities
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4c3" value="Bi- and multi-nucleation">
+									  <label class="form-check-label" for="grid4c3">
+										Bi- and multi-nucleation									
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4c4" value="Ineffective megakaryopoiesis with atypical micro-megakaryocytes">
+									  <label class="form-check-label" for="grid4c4">
+										Ineffective megakaryopoiesis with atypical micro-megakaryocytes
+									  </label>
+									</div>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-sm-1 col-form-label"></label>
+									<button type="button" class="btn btn-light col-2" id="check4c1" onclick="checkAll(71);">Check all</button>
+									<button type="button" class="btn btn-light col-2 hidden" id="uncheck4c1" onclick="uncheckAll(71);">Uncheck all</button>
+								</div>
+								<h3>Additional features</h3>
+								<div class="form-group">
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4c5" value="Hereditary persistence of fetal hemoglobin (HPFH)">
+									  <label class="form-check-label" for="grid4c5">
+										Hereditary persistence of fetal hemoglobin (HPFH)
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4c6" value="β-thalassemia-like anemia">
+									  <label class="form-check-label" for="grid4c6">
+										β-thalassemia-like anemia
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4c7" value="Easily bruising">
+									  <label class="form-check-label" for="grid4c7">
+										Easily bruising
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" name="gridRadios" id="grid4c8" value="Criptorquidia">
+									  <label class="form-check-label" for="grid4c8">
+										Criptorquidia
+									  </label>
+									</div>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-sm-1 col-form-label"></label>
+									<button type="button" class="btn btn-light col-2" id="check4c2" onclick="checkAll(72);">Check all</button>
+									<button type="button" class="btn btn-light col-2 hidden" id="uncheck4c2" onclick="uncheckAll(72);">Uncheck all</button>
+								</div>
+								<div class="form-inline form-group">
+									<label for="" class="col-8 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-3" id="next4c">Next step</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					
+					<div id="resultCDA1" class="hidden">
+						<div class="card card-body">
+							<form>
+								<center>
+								<h3>Clinical suspicion: CDA type-I</h3>
+								<p><strong>Excluded cause(s) of anemias: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore1a" onclick="showMore('1a');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess1a" onclick="showLess('1a');">
+									Hide
+									</button>
+								</p>
+								<div id="rep1a" class="hidden">
+									<div class="list-group" id="excluded1"></div>
+								</div>
+								</br>
+								<p><strong>Not excluded cause(s) of anemias: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore1b" onclick="showMore('1b');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess1b" onclick="showLess('1b');">
+									Hide
+									</button>
+								</p>
+								<div id="rep1b" class="hidden">
+									<div class="list-group" id="notExcluded1"></div>
+								</div>
+								</br>
+								<p><strong>Possible factors of CDA-I: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore1c" onclick="showMore('1c');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess1c" onclick="showLess('1c');">
+									Hide
+									</button>
+								</p>
+								<div id="rep1c" class="hidden">
+									<div class="list-group" id="posFactors1"></div>
+								</div>
+								</br>
+								<p><strong>Unselected possible factors of CDA-I: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore1d" onclick="showMore('1d');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess1d" onclick="showLess('1d');">
+									Hide
+									</button>
+								</p>
+								<div id="rep1d" class="hidden">
+									<div class="list-group" id="unPosFactors1"></div>
+								</div>
+								</br>
+								<p><strong>Recommended Molecular diagnostic(s): </strong></p>
+								<div class="list-group">
+								  <a class="list-group-item list-group-item-action list-group-item-info col-8">
+									CDAN1 (AR)
+								  </a>
+								  <a class="list-group-item list-group-item-action list-group-item-info col-8">
+									C15ORF41 (AR)
+								  </a>
+								</div>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-1 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="DiagLab"><i class="fas fa-vials"></i>&nbspSearch Lab</button>
+									<label for="" class="col-2 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+									<label for="" class="col-1 col-form-label"></label>
+								</div>
+								</center>
+							</form>
+						</div>
+					</div>
+					
+					<div id="resultCDA2" class="hidden">
+						<div class="card card-body">
+							<form>
+							<center>
+								<h3>Clinical suspicion: CDA type-II</h3>
+								<p><strong>Excluded cause(s) of anemias: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore2a" onclick="showMore('2a');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess2a" onclick="showLess('2a');">
+									Hide
+									</button>
+								</p>
+								<div id="rep2a" class="hidden">
+									<div class="list-group" id="excluded2"></div>
+								</div>
+								</br>
+								<p><strong>Not excluded cause(s) of anemias: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore2b" onclick="showMore('2b');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess2b" onclick="showLess('2b');">
+									Hide
+									</button>
+								</p>
+								<div id="rep2b" class="hidden">
+									<div class="list-group" id="notExcluded2"></div>
+								</div>
+								</br>
+								<p><strong>Possible factors of CDA-II: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore2c" onclick="showMore('2c');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess2c" onclick="showLess('2c');">
+									Hide
+									</button>
+								</p>
+								<div id="rep2c" class="hidden">
+									<div class="list-group" id="posFactors2"></div>
+								</div>
+								</br>
+								<p><strong>Unselected possible factors of CDA-II: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore2d" onclick="showMore('2d');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess2d" onclick="showLess('2d');">
+									Hide
+									</button>
+								</p>
+								<div id="rep2d" class="hidden">
+									<div class="list-group" id="unPosFactors2"></div>
+								</div>
+								</br>
+								<p><strong>Recommended Molecular diagnostic(s):</strong></p>
+								<div class="list-group">
+								  <a class="list-group-item list-group-item-action list-group-item-info col-8">
+									SEC23B (AR)
+								  </a>
+								</div>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-1 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="DiagLab"><i class="fas fa-vials"></i>&nbspSearch Lab</button>
+									<label for="" class="col-2 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+									<label for="" class="col-1 col-form-label"></label>
+								</div>
+							</center>
+							</form>
+						</div>
+					</div>
+					
+					<div id="resultCDA3" class="hidden">
+						<div class="card card-body">
+							<form>
+							<center>
+								<h3>Clinical suspicion: CDA type-III</h3>
+								<p><strong>Excluded cause(s) of anemias: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore3a" onclick="showMore('3a');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess3a" onclick="showLess('3a');">
+									Hide
+									</button>
+								</p>
+								<div id="rep3a" class="hidden">
+									<div class="list-group" id="excluded3"></div>
+								</div>
+								</br>
+								<p><strong>Not excluded cause(s) of anemias: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore3b" onclick="showMore('3b');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess3b" onclick="showLess('3b');">
+									Hide
+									</button>
+								</p>
+								<div id="rep3b" class="hidden">
+									<div class="list-group" id="notExcluded3"></div>
+								</div>
+								</br>
+								<p><strong>Possible factors of CDA-III: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore3c" onclick="showMore('3c');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess3c" onclick="showLess('3c');">
+									Hide
+									</button>
+								</p>
+								<div id="rep3c" class="hidden">
+									<div class="list-group" id="posFactors3"></div>
+								</div>
+								</br>
+								<p><strong>Unselected possible factors of CDA-III: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore3d" onclick="showMore('3d');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess3d" onclick="showLess('3d');">
+									Hide
+									</button>
+								</p>
+								<div id="rep3d" class="hidden">
+									<div class="list-group" id="unPosFactors3"></div>
+								</div>
+								</br>
+								<p><strong>Recommended Molecular diagnostic(s):</strong></p>
+								<div class="list-group">
+								  <a Moretons amb facilitat class="list-group-item list-group-item-action list-group-item-info col-8">
+									KIF23 (AD)
+								  </a>
+								</div>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-1 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="DiagLab"><i class="fas fa-vials"></i>&nbspSearch Lab</button>
+									<label for="" class="col-2 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+									<label for="" class="col-1 col-form-label"></label>
+								</div>
+							</center>
+							</form>
+						</div>
+					</div>
+					
+					<div id="resultCDA4" class="hidden">
+						<div class="card card-body">
+							<form>
+							<center>
+								<h3>Clinical suspicion: CDA type-IV</h3>
+								<p><strong>Excluded cause(s) of anemias: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore4a" onclick="showMore('4a');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess4a" onclick="showLess('4a');">
+									Hide
+									</button>
+								</p>
+								<div id="rep4a" class="hidden">
+									<div class="list-group" id="excluded4"></div>
+								</div>
+								</br>
+								<p><strong>Not excluded cause(s) of anemias: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore4b" onclick="showMore('4b');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess4b" onclick="showLess('4b');">
+									Hide
+									</button>
+								</p>
+								<div id="rep4b" class="hidden">
+									<div class="list-group" id="notExcluded4"></div>
+								</div>
+								</br>
+								<p><strong>Possible factors of CDA-IV: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore4c" onclick="showMore('4c');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess4c" onclick="showLess('4c');">
+									Hide
+									</button>
+								</p>
+								<div id="rep4c" class="hidden">
+									<div class="list-group" id="posFactors4"></div>
+								</div>
+								</br>
+								<p><strong>Unselected possible factors of CDA-IV: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore4d" onclick="showMore('4d');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess4d" onclick="showLess('4d');">
+									Hide
+									</button>
+								</p>
+								<div id="rep4d" class="hidden">
+									<div class="list-group" id="unPosFactors4"></div>
+								</div>
+								</br>
+								<p><strong>Recommended Molecular diagnostic(s):</strong></p>
+								<div class="list-group">
+								  <a class="list-group-item list-group-item-action list-group-item-info col-8">
+									KLF1 (AD)
+								  </a>
+								</div>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-1 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="DiagLab"><i class="fas fa-vials"></i>&nbspSearch Lab</button>
+									<label for="" class="col-2 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+									<label for="" class="col-1 col-form-label"></label>
+								</div>
+							</center>
+							</form>
+						</div>
+					</div>
+					
+					<div id="resultCDA5" class="hidden">
+						<div class="card card-body">
+							<form>
+							<center>
+								<h3>Clinical suspicion: XLDTA</h3>
+								<p><strong>Excluded cause(s) of anemias: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore5a" onclick="showMore('5a');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess5a" onclick="showLess('5a');">
+									Hide
+									</button>
+								</p>
+								<div id="rep5a" class="hidden">
+									<div class="list-group" id="excluded5"></div>
+								</div>
+								</br>
+								<p><strong>Not excluded cause(s) of anemias: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore5b" onclick="showMore('5b');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess5b" onclick="showLess('5b');">
+									Hide
+									</button>
+								</p>
+								<div id="rep5b" class="hidden">
+									<div class="list-group" id="notExcluded5"></div>
+								</div>
+								</br>
+								<p><strong>Possible factors of XLDTA: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore5c" onclick="showMore('5c');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess5c" onclick="showLess('5c');">
+									Hide
+									</button>
+								</p>
+								<div id="rep5c" class="hidden">
+									<div class="list-group" id="posFactors5"></div>
+								</div>
+								</br>
+								<p><strong>Unselected possible factors of XLDTA: </strong>
+									<button type="button" class="btn btn-link btn-sm" id="showMore5d" onclick="showMore('5d');">
+									Show
+									</button>
+									<button type="button" class="btn btn-link btn-sm hidden" id="showLess5d" onclick="showLess('5d');">
+									Hide
+									</button>
+								</p>
+								<div id="rep5d" class="hidden">
+									<div class="list-group" id="unPosFactors5"></div>
+								</div>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-1 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="DiagLab"><i class="fas fa-vials"></i>&nbspSearch Lab</button>
+									<label for="" class="col-2 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+									<label for="" class="col-1 col-form-label"></label>
+								</div>
+							</center>
+							</form>
+						</div>
+					</div>
+					
+					<div id="notAnemic" class="hidden">
+						<div class="card card-body">
+							<form>
+							<center>
+								<h3>Not suffering from Anemia</h3>
+								<p><strong>Your hemoglobin level is in range for your gender and age.</strong></p>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-4 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+								</div>
+							</center>
+							</form>
+						</div>
+					</div>
+					
+					<div id="HyperHemoglobinemia" class="hidden">
+						<div class="card card-body">
+							<form>
+							<center>
+								<h3>Clinical suspicion: Hyperhemoglobinemia</h3>
+								<p><strong>Not suffering anemia. Your hemoglobin level is higher than normal values for your gender and age. You may be suffering Hyperhemoglobinemia.</strong></p>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-4 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+								</div>
+							</center>
+							</form>
+						</div>
+					</div>
+					
+					<div id="notCDAa" class="hidden">
+						<div class="card card-body">
+							<form>
+							<center>
+								<h3>Clinical suspicion: not suffering CDA</h3>
+								<p><strong>You didn't exclude any other possible causes of macrocytic anemias.</strong></p>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-4 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+								</div>
+								</center>
+							</form>
+						</div>
+					</div>
+					
+					<div id="notCDAb" class="hidden">
+						<div class="card card-body">
+							<form>
+							<center>
+								<h3>Clinical suspicion: not suffering CDA</h3>
+								<p><strong>You didn't exclude any other possible causes of normocytic anemias.</strong></p>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-4 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+								</div>
+								</center>
+							</form>
+						</div>
+					</div>
+					
+					<div id="notCDAc" class="hidden">
+						<div class="card card-body">
+							<form>
+							<center>
+								<h3>Clinical suspicion: not suffering CDA</h3>
+								<p><strong>You didn't exclude any other possible causes of microcytic anemias.</strong></p>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-4 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+								</div>
+								</center>
+							</form>
+						</div>
+					</div>
+					
+					<div id="notCDAplatMCV" class="hidden">
+						<div class="card card-body">
+							<form>
+							<center>
+								<h3>Clinical suspicion: not suffering CDA</h3>
+								<p><strong>Your platelets count is low (Thrombocytopenia) and your MCV is either normal or high.
+								MCV should be lower to be able to suspect for XLDTA (CDA-V).</strong></p>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-4 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+								</div>
+								</center>
+							</form>
+						</div>
+					</div>
+					
+					<div id="notCDAret" class="hidden">
+						<div class="card card-body">
+							<form>
+							<center>
+								<h3>Clinical suspicion: not suffering CDA</h3>
+								<p><strong>Your reticulocyte count is higher than the threshold required to be diagnosed with CDA.</strong></p>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-4 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+								</div>
+								</center>
+							</form>
+						</div>
+					</div>
+					
+					<div id="notCDAunable" class="hidden">
+						<div class="card card-body">
+							<form>
+							<center>
+								<h3>Clinical suspicion: CDA-II, CDA-III or CDA-IV</h3>
+								<p><strong>It was not possible to differentiate between these three different types of
+								CDA (II, III and IV). Please, review the diagnostic algorithm to know which are the
+								requirements for each type of CDA.</strong></p>
+								</br>
+								<div class="form-inline form-group">
+									<label for="" class="col-4 col-form-label"></label>
+									<button type="button" class="btn btn-primary col-4" id="newdiagnose"><i class="fas fa-diagnoses"></i>&nbspNew diagnostic</button>
+								</div>
+								</center>
+							</form>
+						</div>
+					</div>
+					</br></br>
+				</div>
+				<div class="col-sm-1"></div>
+			</div>

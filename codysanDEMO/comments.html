@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	<title>CoDysAn | Comments</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Edgar Sánchez Prados" />	
+	<meta name="description" content="Algorithms and recommendations for diagnosis and management of congenital dyserythropoietic anemia (CDA)." />
+	<meta name="keywords" content="congenital, dyserythropoietic, anemia, CDA"/>
+	<meta name="robots" content="all" />
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	
+	<!-- My CSS -->
+	<link rel="stylesheet" type="text/css" href="css/custom.css"> 
+	
+	<!--- Cookies consent --->
+	
+	<link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
+	<script src="js/cookieconsent.min.js"></script>
+	
+	<!-- Cool things-->
+	<script defer src="js/all.js"></script>
+	
+	<!-- My basic JS -->
+	<script language="JavaScript" type="text/javascript" src="js/basic2.js"></script>
+
+	</head>
+	<body>
+	
+		<div id="navbar"></div>  
+
+		<!--- START CONTAINER --->
+      
+
+		<div class="container-fluid">
+			<div class="row" style="margin-top:-42px">
+				<iframe id="comments" src="https://docs.google.com/forms/d/e/1FAIpQLSfV30xBFQO9PPpfiKxVGi0c0BZbkCJW1AAoGiqNaZMMWr7H2Q/viewform?embedded=true" width="100%" height="2220" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+			</div>
+		</div>
+
+
+
+		<div id="footer"></>
+
+
+<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<!---<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--->
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+ 					
+		<script type="text/javascript">
+			function reload_page(language) {
+				$( "#navbar" ).load( language +"/navbar.html" );
+				$( "#footer" ).load( language +"/footer.html" );
+			}
+		
+			// First, check the session storage to see if we have the language defined.
+			if (sessionStorage['userLang']) {
+				var userLang = sessionStorage.getItem("userLang");
+			} else {
+				// Language detection
+				var userLang = navigator.language || navigator.userLanguage; 
+			}
+			// HTML5 session Storage
+			sessionStorage.setItem("userLang",userLang);
+			
+			// FIRST PAGE LOAD
+			//  Load the page components based on language.
+			$( "#navbar" ).load( userLang +"/navbar.html" );
+			$( "#footer" ).load( userLang +"/footer.html" );
+
+			//English
+			$("#navbar").on('click', '#gb', function(){
+				userLang = "en";
+				sessionStorage.setItem("userLang","en");
+				reload_page(sessionStorage.getItem("userLang"));
+			});
+			//Spanish  
+			$("#navbar").on('click', '#sp', function(){
+				userLang = "es";
+				sessionStorage.setItem("userLang","es");
+				reload_page(sessionStorage.getItem("userLang"));
+			});
+			//Catalan 
+			$("#navbar").on('click', '#cat', function(){
+				userLang = "ca";
+				sessionStorage.setItem("userLang","ca");
+				reload_page(sessionStorage.getItem("userLang"));
+			});
+		</script>
+	</body>
+</html>

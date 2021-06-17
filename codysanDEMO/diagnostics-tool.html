@@ -1,0 +1,1075 @@
+<!--
+  #####         ######                  #                       #         ###   
+ #     #  ####  #     # #   #  ####    # #   #    #    #    #  ##        #   #  
+ #       #    # #     #  # #  #       #   #  ##   #    #    # # #       #     # 
+ #       #    # #     #   #    ####  #     # # #  #    #    #   #       #     # 
+ #       #    # #     #   #        # ####### #  # #    #    #   #   ### #     # 
+ #     # #    # #     #   #   #    # #     # #   ##     #  #    #   ###  #   #  
+  #####   ####  ######    #    ####  #     # #    #      ##   ##### ###   ###   
+
+ +-++-+ +-++-++-++-++-+ +-++-++-++-++-++-++-+ +-++-++-++-++-++-+
+ |b||y| |E||d||g||a||r| |S||a||n||c||h||e||z| |P||r||a||d||o||s|
+ +-++-+ +-++-++-++-++-+ +-++-++-++-++-++-++-+ +-++-++-++-++-++-+
+                                                                                     
+
+
+-->
+
+<!doctype html>
+<html lang="en">
+	<head>
+	<title>CoDysAn | Diagnostic tool</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Edgar Sánchez Prados" />	
+	<meta name="description" content="Algorithms and recommendations for diagnosis and management of congenital dyserythropoietic anemia (CDA)." />
+	<meta name="keywords" content="congenital, dyserythropoietic, anemia, CDA"/>
+	<meta name="robots" content="all" />
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	
+	<!-- My CSS -->
+	<link rel="stylesheet" type="text/css" href="css/custom.css"> 
+	
+	<!--- Cookies consent --->
+	
+	<link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
+	<script src="js/cookieconsent.min.js"></script>
+	
+	<!-- Cool things-->
+	<script defer src="js/all.js"></script>
+	
+	<!-- My basic JS -->
+	<script language="JavaScript" type="text/javascript" src="js/basic2.js"></script>
+
+	</head>
+	<body>
+	
+		<div id="navbar"></div>  
+
+		<!--- START CONTAINER --->
+      
+		<div class="container-fluid" id="content"></div>
+
+		<!--- END OF CONTAINER --->
+		
+	
+		<div id="footer"></div>
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<!---<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--->
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+ 					
+		<script type="text/javascript">
+			
+			function reload_page(language) {
+				$( "#navbar" ).load( language +"/navbar.html" );
+				$( "#content" ).load( language +"/diaTool-content.html" );
+				$( "#footer" ).load( language +"/footer.html" );
+			}
+			
+			// Functions for show-hide in the results
+			function showMore(input){
+				var hideBtn = "showMore" + input;
+				var showBtn = "showLess" + input;
+				var showSct = "rep" + input;
+				$("button#"+hideBtn).hide(0);
+				$("button#"+showBtn).show(0);
+				$("div#"+showSct).show(0);
+				/*
+				hideBtn.hide(0);
+				showBtn.show(0);
+				showBtn.show(0);
+				*/
+			};
+			
+			function showLess(input){
+				var hideBtn = "showLess" + input;
+				var showBtn = "showMore" + input;
+				var hideSct = "rep" + input;
+				$("button#"+hideBtn).hide(0);
+				$("button#"+showBtn).show(0);
+				$("div#"+hideSct).hide(0);
+			};
+
+
+			// Functions to control units change
+			function hndChngHbUnits(input) {
+				var HbLevelEl = document.getElementById("HbLevel");
+				var prev = prevHbLevelUnits;
+				if (input.value == "g/dL") {
+					HbLevelEl.min = 0;
+					HbLevelEl.max = 100;
+					HbLevelEl.step = "0.1";
+					HbLevelEl.value *= 10;
+				} else if (input.value == "g/L"){
+					HbLevelEl.min = 0;
+					HbLevelEl.max = 10;
+					HbLevelEl.step ="0.01";
+					HbLevelEl.value /= 10;
+				}
+				var current = this.value;
+				alert("Current HbLevelUnits is " + current + " and previous were " + prev);
+			};
+			/*document.getElementById("RetCnt").on('focusin', function(){
+				$(this).data('val', $(this).val());
+			});*/
+			function hndChngRetUnits(input) {
+				var RetCntEl = document.getElementById("RetCnt");
+				var prev = prevRetCntUnits;
+				//When it changes to x10^9/L
+				if (input.value == "x10^9/L") {
+					RetCntEl.min = 0;
+					RetCntEl.max = 200;
+					RetCntEl.step = "1";
+					if (prev == "%") {
+						//RetCntEl.value *= 49.48;
+						RetCntEl.value =  Math.floor(RetCntEl.value*49.48);
+					} else if (prev == "/mm^3") {
+						RetCntEl.value =  Math.floor(RetCntEl.value/1000);
+					}
+				//When it changes to %
+				} else if (input.value == "%"){
+					RetCntEl.min = 0;
+					RetCntEl.max = 5.0;
+					RetCntEl.step ="0.01";
+					if (prev == "x10^9/L" || prev == "x10^3/µL") {
+						//RetCntEl.value *= 49.48;
+						//Math.round(original*100)/100
+						RetCntEl.value =  Math.round((RetCntEl.value/49.48) *100)/100;
+					} else if (prev == "/mm^3") {
+						RetCntEl.value =  Math.round((RetCntEl.value/(49.48*1000))*100)/100;
+					}
+				//When it changes to x10^3/µL
+				} else if (input.value == "x10^3/µL"){
+					RetCntEl.min = 0;
+					RetCntEl.max = 200;
+					RetCntEl.step = "1";
+					if (prev == "%") {
+						RetCntEl.value =  Math.floor(RetCntEl.value*49.48);
+					} else if (prev == "/mm^3") {
+						RetCntEl.value =  Math.floor(RetCntEl.value/1000);
+					}
+				//When it changes to mm^3
+				} else if (input.value == "/mm^3"){
+					RetCntEl.min = 0;
+					RetCntEl.max = 200000;
+					RetCntEl.step = "1";
+					if (prev == "x10^9/L" || prev == "x10^3/µL") {
+						RetCntEl.value =  Math.floor(RetCntEl.value*1000);
+					} else if (prev == "%") {
+						RetCntEl.value =  Math.floor(Math.round(RetCntEl.value*49.48*1000)/1000)*1000;
+					}					
+				}
+				var current = input.value;
+				alert("Current RetCntUnits is " + current + " and previous were " + prev);
+				alert("RetCntUnits now are " + input.value);
+			};
+			
+			function hndChngPlatUnits(input) {
+				var PlatCntEl = document.getElementById("PlatCnt");
+				var prev = prevPlatCntUnits;
+				//When it changes to x10^9/L
+				if (input.value == "x10^9/L") {
+					PlatCntEl.min = 0;
+					PlatCntEl.max = 500;
+					PlatCntEl.step = "1";
+					if (prev == "/mm^3") {
+						PlatCntEl.value =  Math.floor(PlatCntEl.value/1000);
+					}
+				//When it changes to x10^3/µL
+				} else if (input.value == "x10^3/µL"){
+					PlatCntEl.min = 0;
+					PlatCntEl.max = 500;
+					PlatCntEl.step = "1";
+					if (prev == "/mm^3") {
+						PlatCntEl.value =  Math.floor(PlatCntEl.value/1000);
+					}
+				//When it changes to mm^3
+				} else if (input.value == "/mm^3"){
+					PlatCntEl.min = 0;
+					PlatCntEl.max = 500000;
+					PlatCntEl.step = "1";
+					if (prev == "x10^9/L" || prev == "x10^3/µL") {
+						PlatCntEl.value =  Math.floor(PlatCntEl.value*1000);
+					}					
+				}
+				var current = input.value;
+				alert("Current PlatCntUnits is " + current + " and previous were " + prev);
+				alert("PlatCntUnits now are " + input.value);
+			};
+			
+			// Functions to control that inputs are in range
+			function hndChngHbLevel(input) {
+				//Change depending on UNITS!!!!!!!!!!!
+				HbLevelUnits = document.getElementById("HbUnits").value;
+				if (HbLevelUnits == "g/dL"){
+					if (input.value < 0) input.value = 0;
+					if (input.value > 100) input.value = 100;
+				} else if (HbLevelUnits == "g/L"){
+					if (input.value < 0) input.value = 0;
+					if (input.value > 10) input.value = 10;
+				}
+			}
+			function hndChngRBCMCV(input) {
+				if (input.value < 0) input.value = 0;
+				if (input.value > 200) input.value = 200;
+			}
+			function hndChngRetCnt(input) {
+			    //Change depending on UNITS!!!!!!!!!!!
+				RetCntUnits = document.getElementById("RetUnits").value;
+				if (RetCntUnits == "x10^9/L" || RetCntUnits == "x10^3/µL"){
+					if (input.value < 0) input.value = 0;
+					if (input.value > 200) input.value = 200;
+				} else if (RetCntUnits == "/mm^3"){
+					if (input.value < 0) input.value = 0;
+					if (input.value > 200000) input.value = 200000;
+				} else if (RetCntUnits == "%"){
+					if (input.value < 0) input.value = 0;
+					if (input.value > 5.0) input.value = 5.0;
+				}
+			}
+			function hndChngPlatCnt(input) {
+				//Change depending on UNITS!!!!!!!!!!!
+				PlatCntUnits = document.getElementById("PlatUnits").value;
+				if (PlatCntUnits == "x10^9/L" || PlatCntUnits == "x10^3/µL"){
+					if (input.value < 0) input.value = 0;
+					if (input.value > 500) input.value = 500;
+				} else if (PlatCntUnits == "/mm^3"){
+					if (input.value < 0) input.value = 0;
+					if (input.value > 500000) input.value = 500000;
+				}
+			}
+			
+			/*function hndChngMPV(input) {
+				if (input.value < 0) input.value = 0;
+				if (input.value > 50) input.value = 50;
+			}*/
+			
+			// Check all / Uncheck all
+			function checkAll(input) {
+				//alert("input is " + input);
+				var i;
+				var start = 0;
+				if (input > 1 && input < 60) {
+					var checks = document.forms[input];
+					var limit = checks.length;
+				}
+				if (input == 2) {$("#check3a").hide(0); $("#uncheck3a").show(0);};
+				if (input == 3) {$("#check3b").hide(0); $("#uncheck3b").show(0);};
+				if (input == 4) {limit = 5; $("#check3c").hide(0); $("#uncheck3c").show(0);};
+				if (input == 5) {limit = 3; $("#check4a").hide(0); $("#uncheck4a").show(0);};
+				if (input == 61) {limit = 4; checks = document.forms[6];
+					$("#check4b1").hide(0); $("#uncheck4b1").show(0);};
+				if (input == 62) {limit = 11; start = 7; checks = document.forms[6];
+					$("#check4b2").hide(0); $("#uncheck4b2").show(0);};
+				if (input == 63) {limit = 17; start = 13; checks = document.forms[6];
+					$("#check4b3").hide(0); $("#uncheck4b3").show(0);};
+				if (input == 71) {limit = 4; checks = document.forms[7];
+					$("#check4c1").hide(0); $("#uncheck4c1").show(0);};
+				if (input == 72) {limit = 10; start = 6; checks = document.forms[7];
+					$("#check4c2").hide(0); $("#uncheck4c2").show(0);};
+				for (i = start; i < limit; i++) {
+					if (checks[i].checked == false) {
+						checks[i].checked = true;
+					}
+				}
+			};
+			function uncheckAll(input) {
+				//alert("input is " + input);
+				var i;
+				var start = 0;
+				if (input > 1 && input < 60) {
+					var checks = document.forms[input];
+					var limit = checks.length;
+				}
+				if (input == 2) {$("#uncheck3a").hide(0); $("#check3a").show(0);};
+				if (input == 3) {$("#uncheck3b").hide(0); $("#check3b").show(0);};
+				if (input == 4) {limit = 5; $("#uncheck3c").hide(0); $("#check3c").show(0);};
+				if (input == 5) {limit = 3; $("#uncheck4a").hide(0); $("#check4a").show(0);};
+				if (input == 61) {limit = 4; checks = document.forms[6];
+					$("#uncheck4b1").hide(0); $("#check4b1").show(0);};
+				if (input == 62) {limit = 11; start = 7; checks = document.forms[6];
+					$("#uncheck4b2").hide(0); $("#check4b2").show(0);};
+				if (input == 63) {limit = 17; start = 13; checks = document.forms[6];
+					$("#uncheck4b3").hide(0); $("#check4b3").show(0);};
+				if (input == 71) {limit = 4; checks = document.forms[7];
+					$("#uncheck4c1").hide(0); $("#check4c1").show(0);};
+				if (input == 72) {limit = 10; start = 6; checks = document.forms[7];
+					$("#uncheck4c2").hide(0); $("#check4c2").show(0);};
+				for (i = start; i < limit; i++) {
+					if (checks[i].checked == true) {
+						checks[i].checked = false;
+					}
+				}
+			};
+
+			function reportExcluded(input) {
+					
+					if (input == "excluded1") {idx=2};
+					if (input == "excluded2") {idx=3};
+					if (input == "excluded3") {idx=3};
+					if (input == "excluded4") {idx=3};
+					if (input == "excluded5") {idx=4};
+					var excluded = document.getElementById(input);
+					var checks = document.forms[idx];
+					var selected = "";
+					var i;
+
+					for (i = 0; i < checks.length; i++) {
+						if (checks[i].checked) {
+							if (checks[i].value == "") {continue;}
+							// instead of document.write, add the HTML to this new element...
+							excluded.innerHTML += '<a class="list-group-item list-group-item-action list-group-item-success col-8">' +
+								checks[i].value + '</a>';
+						}
+					}
+			};
+			
+			function reportNotExcluded(input) {
+					if (input == "notExcluded1") {idx=2};
+					if (input == "notExcluded2") {idx=3};
+					if (input == "notExcluded3") {idx=3};
+					if (input == "notExcluded4") {idx=3};
+					if (input == "notExcluded5") {idx=4};
+					var notExcluded = document.getElementById(input);
+					var unchecks = document.forms[idx];
+					//var selected = "";
+					var i;
+					var count = 0;
+					for (i = 0; i < unchecks.length; i++) {
+						if (unchecks[i].checked == false) {
+							if (unchecks[i].value == "") {continue;}
+							// instead of document.write, add the HTML to this new element...
+							notExcluded.innerHTML += '<a class="list-group-item list-group-item-action list-group-item-danger col-8">' +
+							unchecks[i].value + '</a>';
+							count += 1;
+						}
+					}
+					// If there's nothing to report
+					// Check the language
+
+					var emptyMsg = "";
+					if (userLang =="en") {
+						emptyMsg = "There were no causes of anemia excluded."
+					} else if (userLang =="es") {
+						emptyMsg = "No se ha excluido ninguna causa de anemia."
+					} else if (userLang =="ca") {
+						emptyMsg = "No s'ha exclós cap causa d'anèmia."
+					}
+					if (count == 0){
+						notExcluded.innerHTML += '<a class="list-group-item list-group-item-warning list-group-item-danger col-8">' +
+						emptyMsg + '</a>';
+					}
+			};
+			
+			function reportPosFactors(input) {
+					var avoid = [];
+					if (input == "posFactors1") {idx=5};
+					if (input == "posFactors2") {idx=6; avoid = [1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16];};
+					if (input == "posFactors3") {idx=6; avoid = [0, 3, 4, 5, 6, 7, 9, 10, 11, 12, 16];};
+					if (input == "posFactors4") {idx=6; avoid = [1, 2, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15];};
+					if (input == "posFactors5") {idx=7};
+					var excluded = document.getElementById(input);
+					var checks = document.forms[idx];
+					//var selected = "";
+					var i;
+					var count = 0;
+					for (i = 0; i < checks.length; i++) {
+						if (avoid.includes(i)){continue;} 
+						else {
+							if (checks[i].checked) {
+								if (checks[i].value == "") {continue;}
+								// instead of document.write, add the HTML to this new element...
+								excluded.innerHTML += '<a class="list-group-item list-group-item-action list-group-item-success col-8">' +
+								checks[i].value + '</a>';
+								count += 1;
+							}
+						} 
+					}
+					// If there's nothing to report
+					// Check the language
+
+					var emptyMsg = "";
+					if (userLang =="en") {
+						emptyMsg = "There were no factors selected for this CDA type."
+					} else if (userLang =="es") {
+						emptyMsg = "No se ha seleccionado ningún factor para este tipo de ACD."
+					} else if (userLang =="ca") {
+						emptyMsg = "No s'ha seleccionat cap factor per a aquest tipus d'ACD."
+					}
+					if (count == 0){
+						excluded.innerHTML += '<a class="list-group-item list-group-item-warning list-group-item-warning col-8">' +
+						emptyMsg + '</a>';
+					}
+					
+			};
+			
+			function reportUnPosFactors(input) {
+					var avoid = [];
+					if (input == "unPosFactors1") {idx=5};
+					if (input == "unPosFactors2") {idx=6; avoid = [1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16];};
+					if (input == "unPosFactors3") {idx=6; avoid = [0, 3, 4, 5, 6, 7, 9, 10, 11, 12, 16];};
+					if (input == "unPosFactors4") {idx=6; avoid = [1, 2, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15];};
+					if (input == "unPosFactors5") {idx=7};
+					var notExcluded = document.getElementById(input);
+					var unchecks = document.forms[idx];
+					//var selected = "";
+					var i;
+					var count = 0;
+					for (i = 0; i < unchecks.length; i++) {
+						if (avoid.includes(i)){continue;} 
+						else {
+							if (unchecks[i].checked == false) {
+								if (unchecks[i].value == "") {continue;}
+								// instead of document.write, add the HTML to this new element...
+								notExcluded.innerHTML += '<a class="list-group-item list-group-item-action list-group-item-danger col-8">' +
+								unchecks[i].value + '</a>';
+								count += 1;
+							}
+						}
+					}
+					// If there's nothing to report
+					// Check the language
+
+					var emptyMsg = "";
+					if (userLang =="en") {
+						emptyMsg = "All factors for this CDA type were selected."
+					} else if (userLang =="es") {
+						emptyMsg = "Todos los factores para este tipo de ACD han sido seleccionados."
+					} else if (userLang =="ca") {
+						emptyMsg = "Tots els factors per a aquest tipus de ACD han estat seleccionats."
+					}
+					if (count == 0){
+						notExcluded.innerHTML += '<a class="list-group-item list-group-item-warning list-group-item-danger col-8">' +
+						emptyMsg + '</a>';
+					}
+			};
+			
+			// Function to check where to go from step 4b
+			
+			function selectPath() {
+					var factorsA = [0, 6, 7];
+					var factorsB = [1, 2, 8, 13, 14, 15];
+					var factorsC = [3, 9, 10, 16];
+					var idx = 6;
+					var checks = document.forms[idx];
+					//var selected = "";
+					var i;
+					var countA = 0;
+					var countB = 0;
+					var countC = 0;
+					var stringA = "";
+					var stringB = "";
+					var stringC = "";
+					var selectedPath = "";
+
+					for (i = 0; i < checks.length; i++) {
+						if (checks[i].checked) {
+							if (factorsA.includes(i)){
+								countA += 1;
+							} else if (factorsB.includes(i)) {
+								countB += 1;
+							} else if (factorsC.includes(i)) {
+								countC += 1;
+							} else {continue}
+						} 
+					}
+					if (countA == countB && countA == countC && countB == countC){selectedPath="UnableToSelect"}					
+					if (countA == 0 && countB == 0 && countC == 0){selectedPath="UnableToSelect"}
+					if ((countA > countB && countA >= countC) || (countA >= countB && countA > countC)){selectedPath = "selectA"};
+					if ((countB > countA && countB >= countC) || (countB >= countA && countB > countC)){selectedPath = "selectB"};
+					if ((countC > countA && countC >= countB) || (countC >= countA && countC > countB)){selectedPath = "selectC"};
+
+					return selectedPath;
+			};
+			
+			// First, check the session storage to see if we have the language defined.
+			if (sessionStorage['userLang']) {
+				userLang = sessionStorage.getItem("userLang");
+			} else {
+				// Language detection
+				userLang = navigator.language || navigator.userLanguage; 
+			}
+			// HTML5 session Storage
+			sessionStorage.setItem("userLang",userLang);
+			
+			// FIRST PAGE LOAD
+			//  Load the page components based on language.
+			$( "#navbar" ).load( userLang +"/navbar.html" );
+			$( "#content" ).load( userLang +"/diaTool-content.html" );
+			$( "#footer" ).load( userLang +"/footer.html" );
+
+			//English
+			$("#navbar").on('click', '#gb', function(){
+				userLang = "en";
+				sessionStorage.setItem("userLang","en");
+				reload_page(sessionStorage.getItem("userLang"));
+			});
+			//Spanish  
+			$("#navbar").on('click', '#sp', function(){
+				userLang = "es";
+				sessionStorage.setItem("userLang","es");
+				reload_page(sessionStorage.getItem("userLang"));
+			});
+			//Catalan 
+			$("#navbar").on('click', '#cat', function(){
+				userLang = "ca";
+				sessionStorage.setItem("userLang","ca");
+				reload_page(sessionStorage.getItem("userLang"));
+			});
+			
+		
+			//Diagnostic Tool stuff
+
+			$(document).ready(function(){
+				CDAtype = "";
+				// Getting the previous values for parameters
+				$("#content").on('focusin', '#HbUnits', function(){
+					//var HbLevelEl = document.getElementById("HbLevel");
+					prevHbLevelUnits = this.value;
+				});
+				$("#content").on('focusin', '#RetUnits', function(){
+					//var RetCntEl = document.getElementById("RetCnt");
+					prevRetCntUnits = this.value;
+				});
+				$("#content").on('focusin', '#PlatUnits', function(){
+					//var PlatCntEl = document.getElementById("PlatCnt");
+					prevPlatCntUnits = this.value;
+				});
+			
+			
+				// Step 1
+				$("#content").on('click', '#next1', function(){
+					AgeGroup = document.getElementById("Age").value;
+					HbLevel = document.getElementById("HbLevel").value;
+					HbLevelUnits = document.getElementById("HbUnits").value;
+					currentYear = new Date().getFullYear();
+					//Age = currentYear - YearOfBirth;
+					//Checking if there was a gender selected
+					if (!(document.getElementById("genderM").checked) && !(document.getElementById("genderF").checked)) {
+						if (userLang =="en") {
+						alert("There was no gender selected!");
+						} else if (userLang =="es") {
+						alert("¡No se ha seleccionado ningún género!");
+						} else if (userLang =="ca") {
+						alert("No s'ha seleccionat cap gènere!");	
+						}
+					} else {
+						//alert("gender was checked!")
+						var genderM = document.getElementById("genderM").value;
+						var genderF = document.getElementById("genderF").value;
+						if (document.getElementById("genderM").checked) {gender = genderM;} else {gender = genderF;};
+						
+					if (AgeGroup == "> 12 years" || AgeGroup == "> 12 anys" || AgeGroup == "> 12 años"){
+						Age = "Adult";
+					} else if (AgeGroup == "> 6 m. to 12 years" || AgeGroup == "> 6 m. a 12 anys" || AgeGroup == "> 6 m. a 12 años"){
+						Age = "Child";	
+					} else if (AgeGroup == "0 to 6 months" || AgeGroup == "0 a 6 mesos" || AgeGroup == "0 a 6 meses"){
+						Age = "Newborn";
+					}
+								
+						/*
+						// Printing some things out
+						alert("Testing some variables:" +
+						//"\nYear of birth is " + YearOfBirth +
+						"\nAge is " + Age +
+						"\ngenderM is " + genderM +
+						"\ngenderF is " + genderF +
+						"\ngender is " + gender +
+						"\nHbLevel is " + HbLevel +
+						"\nHbLevelUnits are " + HbLevelUnits);
+						//
+						*/
+				// Set the thresholds depending on gender and age.
+					if (gender == "Female") {
+						//Female
+						//alert("gender is: " + gender);
+							//Adult
+							if (Age == "Adult") {
+								//alert("You're an adult.");
+								lHbThreshold = 12;
+								hHbThreshold = 16;
+								lMCVthreshold = 80;
+								hMCVthreshold = 100;
+								lRetCntThreshold = 27;
+								hRetCntThreshold = 91;
+							//Child
+							} else if (Age == "Child"){
+								//alert("You're a child.");
+								lHbThreshold = 11;
+								hHbThreshold = 15.5;
+								lMCVthreshold = 74;
+								hMCVthreshold = 89.5;
+								lRetCntThreshold = 40;
+								hRetCntThreshold = 162;
+							//Newborn
+							} else if (Age == "Newborn") {
+								//alert("Hellow world");
+								lHbThreshold = 9.5;
+								hHbThreshold = 18;
+								lMCVthreshold = 77.5;
+								hMCVthreshold = 111.5;
+								lRetCntThreshold = 67;
+								hRetCntThreshold = 142;
+							//Age input error
+							} 
+							/*
+							alert("Thresholds were set:" +
+							"\nlHbThreshold is: " + lHbThreshold +
+							"\nhHbThreshold is: " + hHbThreshold +
+							"\nlMCVthreshold is: " + lMCVthreshold +
+							"\nhMCVthreshold is: " + hMCVthreshold +
+							"\nlRetCntThreshold is: " + lRetCntThreshold +
+							"\nhRetCntThreshold is: " + hRetCntThreshold +
+							"\nlPlatCntThreshold is: " + lPlatCntThreshold +
+							"\nhPlatCntThreshold is: " + hPlatCntThreshold
+							);
+							*/
+
+					} else if (gender == "Male") {
+						//Male
+						//alert("gender is: " + gender);
+						//Adult
+							if (Age == "Adult") {
+								//alert("You're an adult.");
+								lHbThreshold = 13;
+								hHbThreshold = 17.5;
+								lMCVthreshold = 80;
+								hMCVthreshold = 100;
+								lRetCntThreshold = 29;
+								hRetCntThreshold = 95;
+							//Child
+							} else if (Age == "Child"){
+								//alert("You're a child.");
+								lHbThreshold = 11;
+								hHbThreshold = 15.5;
+								lMCVthreshold = 74;
+								hMCVthreshold = 89.5;
+								lRetCntThreshold = 24;
+								hRetCntThreshold = 114;
+							//Newborn
+							} else if (Age == "Newborn") {
+								//alert("Hellow world");
+								lHbThreshold = 9.5;
+								hHbThreshold = 18;
+								lMCVthreshold = 77.5;
+								hMCVthreshold = 111.5;
+								lRetCntThreshold = 61;
+								hRetCntThreshold = 134;
+							//Age input error
+							} 
+							/*
+							alert("Thresholds were set:" +
+							"\nlHbThreshold is: " + lHbThreshold +
+							"\nhHbThreshold is: " + hHbThreshold +
+							"\nlMCVthreshold is: " + lMCVthreshold +
+							"\nhMCVthreshold is: " + hMCVthreshold +
+							"\nlRetCntThreshold is: " + lRetCntThreshold +
+							"\nhRetCntThreshold is: " + hRetCntThreshold +
+							"\nlPlatCntThreshold is: " + lPlatCntThreshold +
+							"\nhPlatCntThreshold is: " + hPlatCntThreshold
+							);
+							*/
+					};
+						lPlatCntThreshold = 145;
+						hPlatCntThreshold = 450;
+
+						// Hide Current Step
+						$("#step1").hide(600);
+						
+						// Check Units and transform to threshold units 
+						var HbL;
+						if (HbLevelUnits == "g/L"){
+							HbL = math.round(HbLevel * 100)/10;
+						} else {
+							HbL = HbLevel;
+						}
+						
+						// Check Hb levels for Anemia
+						//Show Step2 if anemic
+						if (HbL < lHbThreshold) {$("#step2").show(600);};
+						// Not anemic
+						if (HbL >= lHbThreshold && HbL <= hHbThreshold) {$("#notAnemic").show(600);};
+						// Hyperhemoglobinemia
+						if (HbL > hHbThreshold) {$("#HyperHemoglobinemia").show(600);};
+					};
+				});
+				
+				// Step 2
+				$("#content").on('click', '#next2', function(){
+					RBCMCV = document.getElementById("RBCMCV").value;
+					RetCnt = document.getElementById("RetCnt").value;
+					RetCntUnits = document.getElementById("RetUnits").value;
+					PlatCnt = document.getElementById("PlatCnt").value;
+					PlatCntUnits = document.getElementById("PlatUnits").value;
+					//MPV = document.getElementById("MPV").value;
+					//MPVUnits = document.getElementById("MPVUnits").value;
+					/*
+					// Printing some things out
+					alert("Testing some variables:" +
+					"\nRBCMCV is" + RBCMCV +
+					"\nRetCnt is " + RetCnt +
+					"\nRetCntUnits are " + RetCntUnits +
+					"\nPlatCnt is " + PlatCnt +
+					"\nPlatCntUnits are " + PlatCntUnits +
+					"\nMPV is " + MPV +
+					"\nMPVUnits are " + MPVUnits);
+					*/					
+					
+					// Check Units and transform to threshold units 
+					var PlatC;
+					var RetC;
+					if (PlatCntUnits == "x10^9/L" || PlatCntUnits == "x10^3/µL"){
+						PlatC = PlatCnt;
+					} else if (PlatCntUnits == "/mm^3"){
+						PlatC = Math.floor(PlatCnt/1000);
+					}
+		
+					if (RetCntUnits == "x10^9/L" || RetCntUnits == "x10^3/µL"){
+						RetC = RetCnt;
+					} else if (RetCntUnits == "/mm^3"){
+						RetC = Math.floor(RetCnt/1000);
+					} else if (RetCntUnits == "%"){
+						RetC = Math.floor(RetCnt*49.48);
+					}
+				
+					//Check Platelet count --> If low, we have thrombocytopenia. 
+					if (PlatC < lPlatCntThreshold) {PlatCheck = "low";};
+					if (PlatC >= lPlatCntThreshold && PlatC <= hPlatCntThreshold) {PlatCheck = "normal";};
+					if (PlatC > hPlatCntThreshold) {PlatCheck = "high";};
+					//alert("PlatCheck is: " + PlatCheck);
+					
+					// Check Reticulocyte Count 
+					// Reduced or normal RetCnt?
+					if (RetC < lRetCntThreshold) {RetCheck = "low";};
+					if (RetC >= lRetCntThreshold && RetC <= hRetCntThreshold) {RetCheck = "normal";};
+					if (RetC > hRetCntThreshold) {RetCheck = "high";};
+					//alert("RetCheck is: " + RetCheck);
+					
+					// Check MCV
+					if (RBCMCV < lMCVthreshold) {MCVCheck = "low";};
+					if (RBCMCV >= lMCVthreshold && RBCMCV <= hMCVthreshold) {MCVCheck = "normal";};
+					if (RBCMCV > hMCVthreshold) {MCVCheck = "high";};
+					//alert("MCVCheck is: " + MCVCheck);
+					
+					// Hide current step
+					$("#step2").hide(600);
+					
+					// Select & Show Next Step
+
+					// CDA-V --> step3c
+					if (PlatCheck == "low"){
+						if (MCVCheck == "low"){$("#step3c").show(600);}
+						// Not CDA
+						else {$("#notCDAplatMCV").show(600);}
+					}
+					else if (PlatCheck != "low"){
+						if (RetCheck == "high") {
+							// Not CDA
+							$("#notCDAret").show(600);
+						}
+						else {
+							// CDA-V --> step3c
+							if (MCVCheck == "low") {$("#step3c").show(600);};
+							// CDA-II, III or IV --> step3b
+							if (MCVCheck == "normal") {$("#step3b").show(600);};
+							// CDA-I --> step3a
+							if (MCVCheck == "high") {$("#step3a").show(600);};	
+						}
+					};	
+				});
+				
+				// Step 3a
+				$("#content").on('click', '#next3a', function(){
+					
+					var checks3a = document.forms[2];
+					//var selected3a = "";
+					count = 0;
+					var i;
+					for (i = 0; i < checks3a.length; i++) {
+						if (checks3a[i].checked) {
+							if (checks3a[i].value == "") {continue;}
+							//selected3a = selected3a + checks3a[i].value + " ";
+							count +=1;
+						}
+					}					
+					//alert("Testing some variables: " + selected3a);
+
+					// Hide current step
+					$("#step3a").hide(600);
+					
+					// Select next step
+					if (count >= 1){
+						$("#step4a").show(600);
+					} else if (count == 0){
+						$("#notCDAa").show(600);
+					}
+					
+					/*
+				    var checks3a = document.forms[2];
+					var selected3a = "";
+					var i;
+					for (i = 0; i < checks3a.length; i++) {
+						if (checks3a[i].checked) {
+							selected3a = selected3a + checks3a[i].value + " ";
+						}
+					}
+					
+					alert("Testing some variables: " + selected3a);
+					
+					
+					$("#step3a").hide(600);
+					$("#step4a").show(600);
+					
+					*/
+					
+				});
+				
+				// Step 3b
+				$("#content").on('click', '#next3b', function(){
+				
+					var checks3b = document.forms[3];
+					//var selected3a = "";
+					count = 0;
+					var i;
+					for (i = 0; i < checks3b.length; i++) {
+						if (checks3b[i].checked) {
+							if (checks3b[i].value == "") {continue;}
+							//selected3a = selected3a + checks3a[i].value + " ";
+							count +=1;
+						}
+					}					
+					//alert("Testing some variables: " + selected3a);
+
+					// Hide current step
+					$("#step3b").hide(600);
+					
+					// Select next step
+					if (count >= 1){
+						$("#step4b").show(600);
+					} else if (count == 0){
+						$("#notCDAb").show(600);
+					}
+					/*
+					var checks3b = document.forms[3];
+					var selected3b = "";
+					var i;
+					for (i = 0; i < checks3b.length; i++) {
+						if (checks3b[i].checked) {
+							selected3b = selected3b + checks3b[i].value + " ";
+						}
+					}
+					
+					alert("Testing some variables: " + selected3b);
+				
+				
+					$("#step3b").hide(600);
+					$("#step4b").show(600);
+					*/
+				});
+				
+				// Step 3c
+				$("#content").on('click', '#next3c', function(){
+			
+					var checks3c = document.forms[4];
+					//var selected3a = "";
+					count = 0;
+					var i;
+					for (i = 0; i < checks3c.length; i++) {
+						if (checks3c[i].checked) {
+							if (checks3c[i].value == "") {continue;}
+							//selected3a = selected3a + checks3a[i].value + " ";
+							count +=1;
+						}
+					}					
+					//alert("Testing some variables: " + selected3a);
+
+					// Hide current step
+					$("#step3c").hide(600);
+					
+					// Select next step
+					if (count >= 1){
+						$("#step4c").show(600);
+					} else if (count == 0){
+						$("#notCDAc").show(600);
+					}
+			
+					/*
+					var checks3c = document.forms[4];
+					var selected3c = "";
+					var i;
+					for (i = 0; i < checks3c.length; i++) {
+						if (checks3c[i].checked) {
+							selected3c = selected3c + checks3c[i].value + " ";
+						}
+					}
+					
+					alert("Testing some variables: " + selected3c);
+					
+					$("#step3c").hide(600);
+					$("#step4c").show(600);
+					
+					*/
+					
+					
+				});
+				
+				// Step 4a
+				$("#content").on('click', '#next4a', function(){
+					/*
+					var checks4a = document.forms[5];
+					var selected4a = "";
+					var i;
+					for (i = 0; i < checks4a.length; i++) {
+						if (checks4a[i].checked) {
+							selected4a = selected4a + checks4a[i].value + " ";
+						}
+					}
+					
+					alert("Testing some variables: " + selected4a);
+					*/
+					reportExcluded("excluded1");
+					reportNotExcluded("notExcluded1");
+					reportPosFactors("posFactors1");
+					reportUnPosFactors("unPosFactors1");
+					CDAtype = 1;
+					
+					$("#step4a").hide(600);
+					$("#resultCDA1").show(600);
+				});
+				
+				// Step 4b
+				$("#content").on('click', '#next4b', function(){
+					/*
+					var checks4b = document.forms[5];
+					var selected4b = "";
+					var i;
+					for (i = 0; i < checks4b.length; i++) {
+						if (checks4b[i].checked) {
+							selected4b = selected4b + checks4b[i].value + " ";
+						}
+					}
+					
+					alert("Testing some variables: " + selected4b);
+					*/
+					// Depending on other data, report a different type of CDA (II, III or IV)
+					myPath = selectPath();
+					if (myPath == "selectA"){
+						// CDA-II
+						reportExcluded("excluded2");
+						reportNotExcluded("notExcluded2");
+						reportPosFactors("posFactors2");
+						reportUnPosFactors("unPosFactors2");
+						CDAtype = 2;
+						$("#step4b").hide(600);
+						$("#resultCDA2").show(600);
+					} else if (myPath == "selectB"){
+						// CDA-III
+						reportExcluded("excluded3");
+						reportNotExcluded("notExcluded3");
+						reportPosFactors("posFactors3");
+						reportUnPosFactors("unPosFactors3");
+						CDAtype = 3;
+						$("#step4b").hide(600);
+						$("#resultCDA3").show(600);
+					} else if (myPath == "selectC"){
+						// CDA-IV
+						reportExcluded("excluded4");
+						reportNotExcluded("notExcluded4");
+						reportPosFactors("posFactors4");
+						reportUnPosFactors("unPosFactors4");
+						CDAtype = 4;
+						$("#step4b").hide(600);
+						$("#resultCDA4").show(600);
+					} else if (myPath == "UnableToSelect"){
+						// CDA-IV
+						$("#step4b").hide(600);
+						$("#notCDAunable").show(600);
+					}
+				});
+				
+				// Step 4c
+				$("#content").on('click', '#next4c', function(){
+					/*
+					var checks4c = document.forms[6];
+					var selected4c = "";
+					var i;
+					for (i = 0; i < checks4c.length; i++) {
+						if (checks4c[i].checked) {
+							selected4c = selected4c + checks4c[i].value + " ";
+						}
+					}
+					
+					alert("Testing some variables: " + selected4c);
+					*/
+					reportExcluded("excluded5");
+					reportNotExcluded("notExcluded5");
+					reportPosFactors("posFactors5");
+					reportUnPosFactors("unPosFactors5");
+					CDAtype = 5;
+					$("#step4c").hide(600);
+					$("#resultCDA5").show(600);
+				});		
+				
+				// New diagnose
+				$("#content").on('click', '#newdiagnose', function(){
+					location.reload();
+				});			
+				
+				// Search Diagnostic Lab
+				// This is intended to point at Google so that the user can search and decide which lab suits best.
+				//https://www.google.com/search?q=avb+diagnosis
+				$("#content").on('click', '#DiagLab', function(){
+					//Checking the CDA type
+					if (CDAtype != "") {
+						var arg1 = "";
+						var arg2 = "";
+						var arg3 = "";
+						var arg4 = "";
+						if (userLang =="en") {
+							arg3 = "diagnostic";
+							arg4 = "lab";
+						} else if (userLang =="es") {
+							arg3 = "laboratorio";
+							arg4 = "diagnóstico";
+						} else if (userLang =="ca") {
+							arg3 = "laboratori";
+							arg4 = "diagnòstic";
+						}
+						
+						if (CDAtype == 1) {
+							arg1 = "CDAN1 (AR)";
+							arg2 = "C15ORF41 (AR)";
+						} else if (CDAtype == 2){
+							arg1 = "SEC23B (AR)";
+							arg2 = "";
+						} else if (CDAtype == 3){
+							arg1 = "KIF23 (AD)";
+							arg2 = "";
+						} else if (CDAtype == 4){
+							arg1 = "KLF1 (AD)";
+							arg2 = "";
+						} else if (CDAtype == 5){
+							arg1 = "GATA1 (X-linked)";
+							arg2 = "";		
+						}
+						if (arg2 != "") {
+							window.location.href = 'https://www.google.com/search?q='+arg1+'+'+arg2+'+'+arg3+'+'+arg4;
+						} else {
+							window.location.href = 'https://www.google.com/search?q='+arg1+'+'+arg3+'+'+arg4;
+						}
+					} else {
+					}
+				});
+				
+			});
+
+		</script>	
+	</body>
+</html>
