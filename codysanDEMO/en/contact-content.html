@@ -1,0 +1,111 @@
+			<div class="row">
+				<div class="jumbotron jumbotron-fluid jbtron" style="background-image: url(img/headerContact.jpg)">
+					<h1 class="alert-heading">Contact us</h1>
+				</div>
+			</div>		
+			<!--
+			<div class="row justify-content-sm-center">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-10">
+					<form class="form-horizontal" role="form" method="post" action="submit.php">
+						<div class="form-group">
+							<label for="name">Name</label>
+							<input type="text" class="form-control" name="name" placeholder="John Doe">
+						</div>
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="email" class="form-control" name="email" placeholder="john.doe@example.com">
+						</div>
+						<p class="antispam">Leave this empty:
+						<br /><input name="url" /></p>
+						<div class="form-group ">
+							<label for="message">Your Message</label>
+							<textarea class="form-control" name="message" rows="10" cols="50" placeholder="Write your message here."></textarea> 
+						</div>
+						<button type="submit" class="btn btn-default">Send Message</button>
+					</form>
+	
+				</div>
+				<div class="col-sm-1"></div>
+			</div>
+			-->
+			<div class="row justify-content-sm-center">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-10">
+						<div id="contactForm">
+							<p class="text-justfity">Please, fill in the required information:</p>
+							<form id="contact-form" method="post" action="contact.php" role="form">
+								<div class="messages"></div>
+								<div class="controls">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="form_name">Firstname *</label>
+												<input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="form_lastname">Lastname *</label>
+												<input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="form_email">Email *</label>
+												<input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="form_phone">Phone</label>
+												<input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Please enter your phone">
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label for="form_message">Message *</label>
+												<textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please,leave us a message."></textarea>
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<input type="submit" class="btn btn-success btn-send" value="Send message">
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-md-12">
+											<p class="text-muted"><strong>*</strong> These fields are required.</p>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div  id="successMessage" class="hidden">
+							<div class="card" style="width: 100%;">
+								<div class="card-body">
+									<h5 class="card-title">
+										<center>
+										<br><br><br>
+										<i class="fas fa-envelope"></i>&nbsp&nbspYour message was sent successfully. Thank you.
+										<br><br><br>
+										</center>
+									</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-1"></div>
+				
+			</div>
+
+			</br>
